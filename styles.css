@@ -81,8 +81,23 @@ nav a {
   color: var(--muted);
   margin-left: 18px;
   font-size: 14px;
+  position: relative;
+  padding-bottom: 4px;
 }
-nav a:hover { color: var(--text); }
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(98,166,255,.95), transparent);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform .25s ease;
+}
+nav a:hover { color: var(--text); text-shadow: 0 0 10px rgba(98,166,255,.35); }
+nav a:hover::after { transform: scaleX(1); }
 .lang-switch {
   display: inline-flex;
   border: 1px solid var(--line);
@@ -244,6 +259,16 @@ nav a:hover { color: var(--text); }
 }
 .card h3 { margin: 0 0 8px; font-size: 17px; }
 .card p { margin: 0; color: var(--muted); font-size: 14px; }
+
+.feature-zone .card {
+  background:
+    linear-gradient(180deg, rgba(20,34,60,.55), rgba(10,18,34,.45));
+  border-color: rgba(98,166,255,.28);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.05), 0 0 16px rgba(98,166,255,.08);
+}
+.feature-zone .card h3 {
+  color: #d8e9ff;
+}
 
 .architecture .stack {
   display: grid;
