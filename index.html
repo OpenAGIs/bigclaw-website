@@ -27,6 +27,7 @@
         <nav>
           <a href="#capabilities" data-i18n="navCapabilities">Capabilities</a>
           <a href="#architecture" data-i18n="navArchitecture">Architecture</a>
+          <a href="#agentnative" data-i18n="navAgentNative">AgentNative</a>
           <a href="#execution" data-i18n="navExecution">Execution</a>
           <a href="#governance" data-i18n="navGovernance">Governance</a>
         </nav>
@@ -41,7 +42,7 @@
       <section class="hero container">
         <p class="tag" data-i18n="tag">Mission Control for AI Execution</p>
         <div class="signal-row" aria-hidden="true">
-          <span>ORCH/QUEUE</span><span>RUNTIME/SANDBOX</span><span>LEDGER/AUDIT</span><span>POLICY/GATE</span>
+          <span data-i18n="sig1">ORCH/QUEUE</span><span data-i18n="sig2">RUNTIME/SANDBOX</span><span data-i18n="sig3">LEDGER/AUDIT</span><span data-i18n="sig4">POLICY/GATE</span>
         </div>
         <h1 data-i18n="heroTitle">让 AI 执行从“会跑一次”变成“长期可控并行运行”</h1>
         <p class="subtitle" data-i18n="heroSubtitle">
@@ -53,7 +54,7 @@
 
         <div class="hero-actions">
           <a class="btn primary" href="https://github.com/OpenAGIs/BigClaw" target="_blank" rel="noreferrer" data-i18n="btnSource">查看 BigClaw 源码</a>
-          <a class="btn" href="https://github.com/OpenAGIs/OpenAGI.ai" target="_blank" rel="noreferrer" data-i18n="btnRef">参考 OpenAGI.ai</a>
+          <a class="btn" href="https://github.com/OpenAGIs/ClawEvolver" target="_blank" rel="noreferrer" data-i18n="btnRef">了解 ClawEvolver</a>
         </div>
 
         <div class="hero-metrics">
@@ -72,10 +73,10 @@
         </div>
 
         <div class="kpi-strip" aria-label="system metrics">
-          <div class="kpi"><span>Success Rate</span><strong id="kpi-success">99.2%</strong></div>
-          <div class="kpi"><span>Replay Rate</span><strong id="kpi-replay">4.8%</strong></div>
-          <div class="kpi"><span>Avg Latency</span><strong id="kpi-latency">1.42s</strong></div>
-          <div class="kpi"><span>Active Workers</span><strong id="kpi-workers">32</strong></div>
+          <div class="kpi"><span data-i18n="kpi1">Success Rate</span><strong id="kpi-success">99.2%</strong></div>
+          <div class="kpi"><span data-i18n="kpi2">Replay Rate</span><strong id="kpi-replay">4.8%</strong></div>
+          <div class="kpi"><span data-i18n="kpi3">Avg Latency</span><strong id="kpi-latency">1.42s</strong></div>
+          <div class="kpi"><span data-i18n="kpi4">Active Workers</span><strong id="kpi-workers">32</strong></div>
         </div>
       </section>
 
@@ -105,6 +106,28 @@
           <article class="card">
             <h3 data-i18n="cap6h">Observability Ledger</h3>
             <p data-i18n="cap6p">统一记录 logs / traces / artifacts / audit events，支持审计与复盘报告。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="agentnative" class="container section">
+        <h2 data-i18n="anTitle">AgentNative Infrastructure Highlights</h2>
+        <div class="grid">
+          <article class="card">
+            <h3 data-i18n="an1h">Ray-Based Distributed Executors</h3>
+            <p data-i18n="an1p">使用 Ray 管理分布式执行器池，支持任务并行扩缩容与故障重调度。</p>
+          </article>
+          <article class="card">
+            <h3 data-i18n="an2h">Kubernetes-Native Runtime</h3>
+            <p data-i18n="an2p">在 Kubernetes 上运行 Worker 与工具网关，实现隔离、弹性与发布编排一致性。</p>
+          </article>
+          <article class="card">
+            <h3 data-i18n="an3h">Event Streaming Spine</h3>
+            <p data-i18n="an3p">统一事件流连接 Queue、Scheduler、Ledger，保证多 Agent 状态同步与可追踪。</p>
+          </article>
+          <article class="card">
+            <h3 data-i18n="an4h">Policy-Aware Multi-Cluster Ops</h3>
+            <p data-i18n="an4p">跨集群执行遵循策略门禁与审计规则，支持企业级合规运行。</p>
           </article>
         </div>
       </section>
@@ -254,12 +277,14 @@
 
       const i18n = {
         zh: {
-          navCapabilities: '能力', navArchitecture: '架构', navExecution: '执行', navGovernance: '治理',
+          navCapabilities: '能力', navArchitecture: '架构', navAgentNative: 'AgentNative', navExecution: '执行', navGovernance: '治理',
           tag: 'Mission Control for AI Execution',
+          sig1: '编排/队列', sig2: '运行时/沙箱', sig3: '账本/审计', sig4: '策略/门禁',
+          kpi1: '成功率', kpi2: '回放率', kpi3: '平均延迟', kpi4: '活跃执行器',
           heroTitle: '让 AI 执行从“会跑一次”变成“长期可控并行运行”',
           heroSubtitle: 'BigClaw 提供分布式任务编排、策略治理与可审计执行账本。将 Scheduler、Queue、Runtime、Triage、Replay 连接成统一控制平面，支撑企业级 Agent 工作流持续稳定交付。',
           heroSubEn: 'BigClaw 是面向企业级并行执行的可编排控制平面。',
-          btnSource: '查看 BigClaw 源码', btnRef: '参考 OpenAGI.ai',
+          btnSource: '查看 BigClaw 源码', btnRef: '了解 ClawEvolver',
           metricWorkers: '并行执行器', metricWorkersDesc: '多执行器并行调度',
           metricPolicy: '策略门禁', metricPolicyDesc: '风险阈值 + 验收门禁',
           metricLedger: '审计账本', metricLedgerDesc: '全链路日志与工件追溯',
@@ -270,6 +295,11 @@
           cap4h: '分诊与人工接管', cap4p: '对失败、阻塞、待审批任务自动分流，必要时快速人工接管。',
           cap5h: '回放与评测', cap5p: '回放历史执行并对比版本，量化性能、质量与稳定性变化。',
           cap6h: '可观测账本', cap6p: '统一记录 logs / traces / artifacts / audit events，支持审计复盘。',
+          anTitle: 'AgentNative 基础设施亮点',
+          an1h: '基于 Ray 的分布式执行器', an1p: '使用 Ray 管理分布式执行器池，支持任务并行扩缩容与故障重调度。',
+          an2h: 'Kubernetes 原生运行时', an2p: '在 Kubernetes 上运行 Worker 与工具网关，实现隔离、弹性与一致发布。',
+          an3h: '事件流主干', an3p: '统一事件流连接 Queue、Scheduler、Ledger，保证多 Agent 状态同步与可追踪。',
+          an4h: '策略感知的多集群运维', an4p: '跨集群执行遵循策略门禁与审计规则，支持企业级合规运行。',
           archTitle: '架构控制栈',
           s1h: '控制中心', s1p: 'Policy / Prompt / Workflow 版本中心与回滚目标',
           s2h: '工作流引擎', s2p: '任务图生成、策略注入、验收门禁判定',
@@ -287,12 +317,14 @@
           footer: '© 2026 BigClaw · 分布式编排控制平面'
         },
         en: {
-          navCapabilities: 'Capabilities', navArchitecture: 'Architecture', navExecution: 'Execution', navGovernance: 'Governance',
+          navCapabilities: 'Capabilities', navArchitecture: 'Architecture', navAgentNative: 'AgentNative', navExecution: 'Execution', navGovernance: 'Governance',
           tag: 'Mission Control for AI Execution',
+          sig1: 'ORCH/QUEUE', sig2: 'RUNTIME/SANDBOX', sig3: 'LEDGER/AUDIT', sig4: 'POLICY/GATE',
+          kpi1: 'Success Rate', kpi2: 'Replay Rate', kpi3: 'Avg Latency', kpi4: 'Active Workers',
           heroTitle: 'From one-off demos to continuously governed parallel AI execution',
           heroSubtitle: 'BigClaw provides distributed orchestration, policy governance, and auditable execution ledgers. It unifies Scheduler, Queue, Runtime, Triage, and Replay into one enterprise control plane.',
           heroSubEn: 'Built for stable long-running agent workflows at production scale.',
-          btnSource: 'View BigClaw Source', btnRef: 'Reference OpenAGI.ai',
+          btnSource: 'View BigClaw Source', btnRef: 'Explore ClawEvolver',
           metricWorkers: 'Parallel Workers', metricWorkersDesc: 'Multi-worker parallel scheduling',
           metricPolicy: 'Policy Gates', metricPolicyDesc: 'Risk thresholds + acceptance gates',
           metricLedger: 'Audit Ledger', metricLedgerDesc: 'End-to-end logs and artifact traceability',
@@ -303,6 +335,11 @@
           cap4h: 'Triage & Human Takeover', cap4p: 'Auto-route failed/blocked/approval-pending runs for rapid human intervention.',
           cap5h: 'Replay & Benchmark', cap5p: 'Replay historical runs and compare versions for quality and stability deltas.',
           cap6h: 'Observability Ledger', cap6p: 'Unify logs, traces, artifacts, and audit events for governance and review.',
+          anTitle: 'AgentNative Infrastructure Highlights',
+          an1h: 'Ray-Based Distributed Executors', an1p: 'Use Ray to manage distributed executor pools with elastic parallel scaling and failure re-scheduling.',
+          an2h: 'Kubernetes-Native Runtime', an2p: 'Run workers and tool gateways on Kubernetes for isolation, elasticity, and consistent rollout orchestration.',
+          an3h: 'Event Streaming Spine', an3p: 'A unified event stream links Queue, Scheduler, and Ledger for synchronized multi-agent state tracking.',
+          an4h: 'Policy-Aware Multi-Cluster Ops', an4p: 'Cross-cluster execution adheres to policy gates and audit controls for enterprise compliance.',
           archTitle: 'Architecture Control Stack',
           s1h: 'Control Center', s1p: 'Versioned policy/prompt/workflow center with rollback targets',
           s2h: 'Workflow Engine', s2p: 'Task graph generation, policy injection, acceptance gating',
