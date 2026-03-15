@@ -39,6 +39,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
 }
 .brand { font-size: 20px; font-weight: 800; letter-spacing: 0.5px; }
 nav a {
@@ -48,6 +49,24 @@ nav a {
   font-size: 14px;
 }
 nav a:hover { color: var(--text); }
+.lang-switch {
+  display: inline-flex;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.lang-btn {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 12px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+.lang-btn.active {
+  background: rgba(98,166,255,.15);
+  color: var(--text);
+}
 
 .hero { padding: 88px 0 52px; }
 .tag {
@@ -117,6 +136,32 @@ nav a:hover { color: var(--text); }
 .hero-metrics span {
   color: var(--muted);
   font-size: 13px;
+}
+
+.kpi-strip {
+  margin-top: 12px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.kpi {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px;
+  background: rgba(8, 19, 34, 0.6);
+}
+.kpi span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+}
+.kpi strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 22px;
+  color: #dff0ff;
 }
 
 .section { padding: 38px 0; }
@@ -255,12 +300,13 @@ nav a:hover { color: var(--text); }
   .execution .timeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .governance { grid-template-columns: 1fr; }
   .hero-metrics { grid-template-columns: 1fr; }
+  .kpi-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .board-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 740px) {
   nav { display: none; }
-  .grid, .grid.six, .execution .timeline, .board-grid { grid-template-columns: 1fr; }
+  .grid, .grid.six, .execution .timeline, .board-grid, .kpi-strip { grid-template-columns: 1fr; }
   .footer-inner { flex-direction: column; align-items: flex-start; padding: 14px 0; }
   .links a { margin: 0 12px 0 0; }
 }
