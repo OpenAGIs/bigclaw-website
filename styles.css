@@ -24,6 +24,14 @@ body {
   line-height: 1.6;
 }
 
+#network-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  pointer-events: none;
+  opacity: .6;
+}
+
 .bg-grid {
   position: fixed;
   inset: 0;

@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <canvas id="network-canvas" aria-hidden="true"></canvas>
     <div class="bg-grid" aria-hidden="true"></div>
     <div class="bg-scan" aria-hidden="true"></div>
     <header class="topbar">
@@ -208,6 +209,77 @@
     </footer>
 
     <script>
+      (() => {
+        const canvas = document.getElementById('network-canvas');
+        const ctx = canvas.getContext('2d', { alpha: true });
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!ctx || reduced) return;
+
+        let w = 0, h = 0, dpr = 1;
+        let nodes = [];
+        const speed = 0.18;
+
+        const makeNodes = () => {
+          const count = Math.max(26, Math.min(72, Math.floor((w * h) / 28000)));
+          nodes = Array.from({ length: count }, () => ({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            vx: (Math.random() - 0.5) * speed,
+            vy: (Math.random() - 0.5) * speed,
+            r: Math.random() * 1.4 + 0.6
+          }));
+        };
+
+        const resize = () => {
+          dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+          w = window.innerWidth;
+          h = window.innerHeight;
+          canvas.width = Math.floor(w * dpr);
+          canvas.height = Math.floor(h * dpr);
+          canvas.style.width = `${w}px`;
+          canvas.style.height = `${h}px`;
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          makeNodes();
+        };
+
+        const step = () => {
+          ctx.clearRect(0, 0, w, h);
+          for (const n of nodes) {
+            n.x += n.vx; n.y += n.vy;
+            if (n.x < 0 || n.x > w) n.vx *= -1;
+            if (n.y < 0 || n.y > h) n.vy *= -1;
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(110, 170, 255, 0.65)';
+            ctx.fill();
+          }
+
+          for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+              const a = nodes[i], b = nodes[j];
+              const dx = a.x - b.x;
+              const dy = a.y - b.y;
+              const dist = Math.hypot(dx, dy);
+              const max = 130;
+              if (dist < max) {
+                const alpha = (1 - dist / max) * 0.22;
+                ctx.strokeStyle = `rgba(98, 166, 255, ${alpha})`;
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(a.x, a.y);
+                ctx.lineTo(b.x, b.y);
+                ctx.stroke();
+              }
+            }
+          }
+          requestAnimationFrame(step);
+        };
+
+        resize();
+        window.addEventListener('resize', resize, { passive: true });
+        requestAnimationFrame(step);
+      })();
+
       const i18n = {
         zh: {
           tag: 'Mission Control for AI Execution',
