@@ -19,6 +19,8 @@
       .sim-ticket.done { border-color:rgba(51,209,143,.5); background:rgba(51,209,143,.12); }
       .sim-ticket.alert { border-color:rgba(255,107,107,.55); background:rgba(255,107,107,.12); }
       .sim-toolbar,.sim-subtools { display:flex; gap:10px; flex-wrap:wrap; margin:12px 0; align-items:center; }
+      .home-btn { margin-left:auto; border-color:rgba(120,181,255,.5); background:linear-gradient(180deg, rgba(24,44,74,.9), rgba(14,28,48,.75)); box-shadow: 0 0 14px rgba(98,166,255,.2); }
+      .home-btn:hover { box-shadow: 0 0 18px rgba(98,166,255,.4); transform: translateY(-1px); }
       .sim-subtools input,.sim-subtools select { border:1px solid var(--line); border-radius:10px; padding:8px 10px; color:var(--text); background:rgba(8,19,34,.6); }
       .sim-kpis,.infra-kpis { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; margin:12px 0; }
       .sim-kpi { border:1px solid var(--line); border-radius:12px; padding:10px; background:rgba(8,19,34,.5); }
@@ -62,7 +64,7 @@
         <button class="btn" id="takeoverBtn" data-i18n="b3">触发人工接管</button>
         <button class="btn" id="autoBtn" data-i18n="b4">开启自动流量</button>
         <button class="btn" id="resetBtn" data-i18n="b5">重置面板</button>
-        <a class="btn" href="index.html" data-i18n="b6">返回首页</a>
+        <a class="btn home-btn" href="index.html" data-i18n="b6">⌂ 返回首页</a>
       </div>
 
       <div class="sim-subtools">
@@ -120,7 +122,7 @@
     </main>
 
     <script>
-      const dict={zh:{tag:'交互式编排模拟',title:'BigClaw 任务编排模拟器',subtitle:'支持单任务触发、自动流转、失败回放和人工接管。点击 Ticket 可快速重试。',k1:'排队',k2:'通过',k3:'回放',k4:'接管',b1:'启动成功任务',b2:'触发回放任务',b3:'触发人工接管',b4:'开启自动流量',b5:'重置面板',b6:'返回首页',speed:'速度',prefix:'任务前缀',l1:'队列',l2:'运行中',l3:'门禁',l4:'结果',logTitle:'执行日志',autoOn:'停止自动流量',autoOff:'开启自动流量'},en:{tag:'Interactive Orchestration Simulation',title:'BigClaw Orchestration Simulator',subtitle:'Trigger single runs, auto traffic, replay and human takeover. Click a ticket to retry quickly.',k1:'Queued',k2:'Passed',k3:'Replay',k4:'Takeover',b1:'Start Success Run',b2:'Trigger Replay Run',b3:'Trigger Takeover',b4:'Start Auto Traffic',b5:'Reset Board',b6:'Back Home',speed:'Speed',prefix:'Task Prefix',l1:'Queue',l2:'Running',l3:'Gate',l4:'Outcome',logTitle:'Execution Log',autoOn:'Stop Auto Traffic',autoOff:'Start Auto Traffic'}};
+      const dict={zh:{tag:'交互式编排模拟',title:'BigClaw 任务编排模拟器',subtitle:'支持单任务触发、自动流转、失败回放和人工接管。点击 Ticket 可快速重试。',k1:'排队',k2:'通过',k3:'回放',k4:'接管',b1:'启动成功任务',b2:'触发回放任务',b3:'触发人工接管',b4:'开启自动流量',b5:'重置面板',b6:'⌂ 返回首页',speed:'速度',prefix:'任务前缀',l1:'队列',l2:'运行中',l3:'门禁',l4:'结果',logTitle:'执行日志',autoOn:'停止自动流量',autoOff:'开启自动流量'},en:{tag:'Interactive Orchestration Simulation',title:'BigClaw Orchestration Simulator',subtitle:'Trigger single runs, auto traffic, replay and human takeover. Click a ticket to retry quickly.',k1:'Queued',k2:'Passed',k3:'Replay',k4:'Takeover',b1:'Start Success Run',b2:'Trigger Replay Run',b3:'Trigger Takeover',b4:'Start Auto Traffic',b5:'Reset Board',b6:'⌂ Back Home',speed:'Speed',prefix:'Task Prefix',l1:'Queue',l2:'Running',l3:'Gate',l4:'Outcome',logTitle:'Execution Log',autoOn:'Stop Auto Traffic',autoOff:'Start Auto Traffic'}};
       let lang='zh';
       const apply=(l)=>{lang=l;document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(dict[l][k])el.textContent=dict[l][k];});const auto=document.getElementById('autoBtn');if(auto.dataset.running==='1')auto.textContent=dict[l].autoOn;};
       document.querySelectorAll('.lang-btn').forEach(b=>b.onclick=()=>apply(b.dataset.lang));
