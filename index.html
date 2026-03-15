@@ -373,6 +373,31 @@
         });
       });
 
+      (() => {
+        const navLinks = Array.from(document.querySelectorAll('nav a[href^="#"]'));
+        const sections = navLinks
+          .map((a) => document.querySelector(a.getAttribute('href')))
+          .filter(Boolean);
+        if (!sections.length) return;
+
+        const byId = new Map(navLinks.map((a) => [a.getAttribute('href').slice(1), a]));
+        const setActive = (id) => {
+          navLinks.forEach((a) => a.classList.remove('nav-active'));
+          const hit = byId.get(id);
+          if (hit) hit.classList.add('nav-active');
+        };
+
+        const obs = new IntersectionObserver((entries) => {
+          const visible = entries
+            .filter((e) => e.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+          if (visible[0]?.target?.id) setActive(visible[0].target.id);
+        }, { threshold: [0.2, 0.4, 0.65], rootMargin: '-15% 0px -55% 0px' });
+
+        sections.forEach((sec) => obs.observe(sec));
+        setActive(sections[0].id);
+      })();
+
       const jitter = () => (Math.random() * 0.8 - 0.4).toFixed(2);
       setInterval(() => {
         const success = (99.2 + Number(jitter()) * 0.1).toFixed(2);
