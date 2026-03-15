@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BigClaw — Distributed Orchestration for AI Work</title>
+    <meta
+      name="description"
+      content="BigClaw：大气简洁的分布式并行编排平台，面向多Agent、多工作流与可审计执行。"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <div class="brand">BigClaw</div>
+        <nav>
+          <a href="#capabilities">能力</a>
+          <a href="#architecture">架构</a>
+          <a href="#workflow">工作流</a>
+          <a href="#contact">联系</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero container">
+        <p class="tag">Distributed · Parallel · Orchestrated</p>
+        <h1>让 AI 团队像云原生系统一样并行协作</h1>
+        <p class="subtitle">
+          BigClaw 聚焦分布式执行、可编排工作流与可审计治理。
+          将多 Agent 的任务拆解、调度、观测与回放，收敛到一个统一控制平面。
+        </p>
+        <div class="hero-actions">
+          <a class="btn primary" href="https://github.com/OpenAGIs/BigClaw" target="_blank" rel="noreferrer">查看 BigClaw 源码</a>
+          <a class="btn" href="https://github.com/OpenAGIs/bigclaw-website" target="_blank" rel="noreferrer">网站仓库</a>
+        </div>
+      </section>
+
+      <section id="capabilities" class="container section">
+        <h2>核心能力</h2>
+        <div class="grid">
+          <article class="card">
+            <h3>分布式并行执行</h3>
+            <p>面向多任务队列和多执行器的并行编排，支持任务拆分、优先级调度与安全隔离。</p>
+          </article>
+          <article class="card">
+            <h3>可编排工作流 DSL</h3>
+            <p>将复杂流程显式化：从策略、工具权限到验收门禁，形成可复用、可审计的执行蓝图。</p>
+          </article>
+          <article class="card">
+            <h3>可观测与回放</h3>
+            <p>统一日志/轨迹/工件账本，支持失败回放、偏差定位与版本对比，持续提升执行质量。</p>
+          </article>
+          <article class="card">
+            <h3>风险与治理</h3>
+            <p>内置风险评分、审批接管与策略中心，让自动化能力在企业场景中可控落地。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="architecture" class="container section architecture">
+        <h2>BigClaw 架构视图</h2>
+        <div class="stack">
+          <div><strong>Control Center</strong><span>策略 / Prompt / Policy 版本中心</span></div>
+          <div><strong>Workflow Engine</strong><span>DSL 解析、任务图编排、验收门禁</span></div>
+          <div><strong>Scheduler & Queue</strong><span>优先级队列、风险约束调度、并行执行</span></div>
+          <div><strong>Runtime & Gateway</strong><span>Worker 执行沙箱、工具调用审计</span></div>
+          <div><strong>Observability Ledger</strong><span>日志、轨迹、工件、报告与回放</span></div>
+        </div>
+      </section>
+
+      <section id="workflow" class="container section">
+        <h2>典型工作流</h2>
+        <ol class="steps">
+          <li>定义目标与验收标准，声明工具权限和风险阈值</li>
+          <li>工作流引擎拆解任务图并提交调度队列</li>
+          <li>多执行器并行处理，实时产出可追溯工件</li>
+          <li>失败自动分流到 triage / replay / human takeover</li>
+          <li>报告中心生成周报、ROI 与质量复盘</li>
+        </ol>
+      </section>
+    </main>
+
+    <footer id="contact" class="footer">
+      <div class="container footer-inner">
+        <p>© 2026 BigClaw · Built for OpenClaw-scale orchestration</p>
+        <a href="https://bigclaw.com" target="_blank" rel="noreferrer">bigclaw.com</a>
+      </div>
+    </footer>
+  </body>
+</html>
