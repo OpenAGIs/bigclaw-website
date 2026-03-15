@@ -3,14 +3,110 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BigClaw Demo</title>
+    <title>BigClaw Demo Simulator</title>
     <link rel="stylesheet" href="styles.css" />
+    <style>
+      .sim-wrap { display:grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap:12px; }
+      .sim-lane { border:1px solid var(--line); border-radius:14px; background:var(--panel); padding:12px; min-height:280px; }
+      .sim-lane h3 { margin:0 0 10px; font-size:13px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; }
+      .sim-ticket { border:1px solid rgba(98,166,255,.35); background:rgba(98,166,255,.08); border-radius:10px; padding:10px; font-size:13px; margin-bottom:8px; cursor:pointer; }
+      .sim-ticket.done { border-color:rgba(51,209,143,.5); background:rgba(51,209,143,.12); }
+      .sim-ticket.alert { border-color:rgba(255,107,107,.55); background:rgba(255,107,107,.12); }
+      .sim-toolbar { display:flex; gap:10px; flex-wrap:wrap; margin:14px 0 18px; }
+      .sim-log { border:1px solid var(--line); border-radius:12px; background:rgba(8,19,34,.5); padding:12px; color:var(--muted); font-size:13px; max-height:180px; overflow:auto; }
+      @media (max-width: 920px){ .sim-wrap{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+      @media (max-width: 640px){ .sim-wrap{ grid-template-columns:1fr; } }
+    </style>
   </head>
   <body>
-    <main class="container section" style="padding-top:80px">
-      <h1>BigClaw Demo (Placeholder)</h1>
-      <p class="subtitle">这里将放置 BigClaw 编排演示（任务流、调度、回放）。</p>
-      <p><a class="btn primary" href="index.html">返回首页</a></p>
+    <main class="container section" style="padding-top:72px">
+      <p class="tag">Interactive Orchestration Simulation</p>
+      <h1>BigClaw 任务编排模拟器</h1>
+      <p class="subtitle">点击按钮后，任务会从 Queue → Running → Gate → Outcome 流转。可演示成功、回放和人工接管分流。</p>
+
+      <div class="sim-toolbar">
+        <button class="btn primary" id="startBtn">启动模拟</button>
+        <button class="btn" id="replayBtn">触发回放任务</button>
+        <button class="btn" id="takeoverBtn">触发人工接管</button>
+        <a class="btn" href="index.html">返回首页</a>
+      </div>
+
+      <section class="sim-wrap" id="board">
+        <div class="sim-lane"><h3>Queue</h3><div id="lane-queue"></div></div>
+        <div class="sim-lane"><h3>Running</h3><div id="lane-running"></div></div>
+        <div class="sim-lane"><h3>Gate</h3><div id="lane-gate"></div></div>
+        <div class="sim-lane"><h3>Outcome</h3><div id="lane-outcome"></div></div>
+      </section>
+
+      <h2 style="margin-top:18px">Execution Log</h2>
+      <div class="sim-log" id="log"></div>
     </main>
+
+    <script>
+      const lanes = {
+        queue: document.getElementById('lane-queue'),
+        running: document.getElementById('lane-running'),
+        gate: document.getElementById('lane-gate'),
+        outcome: document.getElementById('lane-outcome')
+      };
+      const logEl = document.getElementById('log');
+      let seq = 300;
+
+      const log = (msg) => {
+        const t = new Date().toLocaleTimeString();
+        const line = document.createElement('div');
+        line.textContent = `[${t}] ${msg}`;
+        logEl.prepend(line);
+      };
+
+      const ticket = (text, cls='') => {
+        const el = document.createElement('div');
+        el.className = `sim-ticket ${cls}`.trim();
+        el.textContent = text;
+        return el;
+      };
+
+      const runOne = (mode='success') => {
+        const id = `TASK-${seq++}`;
+        const q = ticket(`${id} · build orchestration plan`);
+        lanes.queue.prepend(q);
+        log(`${id} queued`);
+
+        setTimeout(() => {
+          lanes.running.prepend(q);
+          q.textContent = `${id} · worker executing`;
+          log(`${id} running on worker cluster`);
+        }, 700);
+
+        setTimeout(() => {
+          lanes.gate.prepend(q);
+          q.textContent = `${id} · acceptance gate check`;
+          log(`${id} reached acceptance gate`);
+        }, 1500);
+
+        setTimeout(() => {
+          lanes.outcome.prepend(q);
+          if (mode === 'success') {
+            q.classList.add('done');
+            q.textContent = `PASS · ${id} report exported`;
+            log(`${id} passed and report exported`);
+          } else if (mode === 'replay') {
+            q.classList.add('alert');
+            q.textContent = `REPLAY · ${id} policy mismatch`;
+            log(`${id} routed to replay due to policy mismatch`);
+          } else {
+            q.classList.add('alert');
+            q.textContent = `TAKEOVER · ${id} human review`;
+            log(`${id} escalated to human takeover`);
+          }
+        }, 2300);
+      };
+
+      document.getElementById('startBtn').addEventListener('click', () => runOne('success'));
+      document.getElementById('replayBtn').addEventListener('click', () => runOne('replay'));
+      document.getElementById('takeoverBtn').addEventListener('click', () => runOne('takeover'));
+
+      log('Simulator ready');
+    </script>
   </body>
 </html>
