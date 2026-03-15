@@ -8,7 +8,7 @@
     <style>
       .demo-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
       .sim-wrap { display:grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap:12px; }
-      .sim-lane { border:1px solid var(--line); border-radius:14px; background:linear-gradient(180deg, rgba(18,30,52,.55), rgba(10,18,34,.4)); padding:12px; min-height:280px; box-shadow: inset 0 1px 0 rgba(255,255,255,.04), 0 0 18px rgba(62,139,255,.08); }
+      .sim-lane { border:1px solid var(--line); border-radius:14px; background:linear-gradient(180deg, rgba(18,30,52,.55), rgba(10,18,34,.4)); padding:12px; min-height:220px; box-shadow: inset 0 1px 0 rgba(255,255,255,.04), 0 0 18px rgba(62,139,255,.08); }
       .lane-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 10px}
       .sim-lane h3 { margin:0; font-size:13px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; }
       .lane-spark{width:72px;height:18px;opacity:.9}
@@ -27,6 +27,11 @@
       .sim-kpi span { display:block; color:var(--muted); font-size:12px; }
       .sim-kpi strong { font-size:20px; }
       .sim-log { border:1px solid var(--line); border-radius:12px; background:rgba(8,19,34,.5); padding:12px; color:var(--muted); font-size:13px; max-height:220px; overflow:auto; }
+.sim-log .row{display:flex;gap:8px;align-items:center;margin:0 0 6px}
+.sim-log .chip{font-size:11px;padding:2px 7px;border-radius:999px;border:1px solid rgba(120,181,255,.35);color:#b8d6ff}
+.sim-log .chip.warn{border-color:rgba(255,190,85,.45);color:#ffd994}
+.sim-log .chip.bad{border-color:rgba(255,107,107,.5);color:#ffc0c0}
+.lane-body:empty::before{content:attr(data-empty);display:block;padding:8px 10px;border:1px dashed rgba(120,181,255,.22);border-radius:8px;color:#7f93b6;font-size:12px}
       .pill { font-size:12px; color:var(--muted); }
       @keyframes shimmer{0%,100%{transform:translateX(-120%)}50%{transform:translateX(120%)}}
       @media (max-width: 920px){ .sim-wrap,.sim-kpis,.infra-kpis{grid-template-columns:repeat(2,minmax(0,1fr));} }
@@ -78,42 +83,42 @@
         <div class="sim-lane">
           <div class="lane-head">
             <h3 data-i18n="l1">Queue</h3>
-            <svg class="lane-spark" viewBox="0 0 72 18" aria-hidden="true">
+            <svg id="spark-queue" class="lane-spark" viewBox="0 0 72 18" aria-hidden="true">
               <path class="fill" d="M1 16 L10 12 L21 13 L32 7 L44 9 L58 4 L71 6 L71 18 L1 18 Z"></path>
               <path class="line" d="M1 16 L10 12 L21 13 L32 7 L44 9 L58 4 L71 6"></path>
             </svg>
           </div>
-          <div id="lane-queue"></div>
+          <div id="lane-queue" class="lane-body" data-empty="等待任务进入队列…"></div>
         </div>
         <div class="sim-lane">
           <div class="lane-head">
             <h3 data-i18n="l2">Running</h3>
-            <svg class="lane-spark" viewBox="0 0 72 18" aria-hidden="true">
+            <svg id="spark-running" class="lane-spark" viewBox="0 0 72 18" aria-hidden="true">
               <path class="fill" d="M1 14 L12 9 L24 11 L35 5 L47 8 L60 3 L71 5 L71 18 L1 18 Z"></path>
               <path class="line" d="M1 14 L12 9 L24 11 L35 5 L47 8 L60 3 L71 5"></path>
             </svg>
           </div>
-          <div id="lane-running"></div>
+          <div id="lane-running" class="lane-body" data-empty="暂无运行中任务…"></div>
         </div>
         <div class="sim-lane">
           <div class="lane-head">
             <h3 data-i18n="l3">Gate</h3>
-            <svg class="lane-spark" viewBox="0 0 72 18" aria-hidden="true">
+            <svg id="spark-gate" class="lane-spark" viewBox="0 0 72 18" aria-hidden="true">
               <path class="fill" d="M1 15 L12 15 L22 10 L34 10 L46 6 L58 7 L71 4 L71 18 L1 18 Z"></path>
               <path class="line" d="M1 15 L12 15 L22 10 L34 10 L46 6 L58 7 L71 4"></path>
             </svg>
           </div>
-          <div id="lane-gate"></div>
+          <div id="lane-gate" class="lane-body" data-empty="等待门禁校验…"></div>
         </div>
         <div class="sim-lane">
           <div class="lane-head">
             <h3 data-i18n="l4">Outcome</h3>
-            <svg class="lane-spark" viewBox="0 0 72 18" aria-hidden="true">
+            <svg id="spark-outcome" class="lane-spark" viewBox="0 0 72 18" aria-hidden="true">
               <path class="fill" d="M1 16 L11 14 L22 12 L34 8 L45 9 L58 6 L71 2 L71 18 L1 18 Z"></path>
               <path class="line" d="M1 16 L11 14 L22 12 L34 8 L45 9 L58 6 L71 2"></path>
             </svg>
           </div>
-          <div id="lane-outcome"></div>
+          <div id="lane-outcome" class="lane-body" data-empty="结果将在这里显示…"></div>
         </div>
       </section>
 
@@ -122,24 +127,196 @@
     </main>
 
     <script>
-      const dict={zh:{tag:'交互式编排模拟',title:'BigClaw 任务编排模拟器',subtitle:'支持单任务触发、自动流转、失败回放和人工接管。点击 Ticket 可快速重试。',k1:'排队',k2:'通过',k3:'回放',k4:'接管',b1:'启动成功任务',b2:'触发回放任务',b3:'触发人工接管',b4:'开启自动流量',b5:'重置面板',b6:'⌂ 返回首页',speed:'速度',prefix:'任务前缀',l1:'队列',l2:'运行中',l3:'门禁',l4:'结果',logTitle:'执行日志',autoOn:'停止自动流量',autoOff:'开启自动流量'},en:{tag:'Interactive Orchestration Simulation',title:'BigClaw Orchestration Simulator',subtitle:'Trigger single runs, auto traffic, replay and human takeover. Click a ticket to retry quickly.',k1:'Queued',k2:'Passed',k3:'Replay',k4:'Takeover',b1:'Start Success Run',b2:'Trigger Replay Run',b3:'Trigger Takeover',b4:'Start Auto Traffic',b5:'Reset Board',b6:'⌂ Back Home',speed:'Speed',prefix:'Task Prefix',l1:'Queue',l2:'Running',l3:'Gate',l4:'Outcome',logTitle:'Execution Log',autoOn:'Stop Auto Traffic',autoOff:'Start Auto Traffic'}};
-      let lang='zh';
-      const apply=(l)=>{lang=l;document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(dict[l][k])el.textContent=dict[l][k];});const auto=document.getElementById('autoBtn');if(auto.dataset.running==='1')auto.textContent=dict[l].autoOn;};
-      document.querySelectorAll('.lang-btn').forEach(b=>b.onclick=()=>apply(b.dataset.lang));
+      const dict = {
+        zh: {
+          tag:'交互式编排模拟', title:'BigClaw 任务编排模拟器', subtitle:'支持单任务触发、自动流转、失败回放和人工接管。点击 Ticket 可快速重试。',
+          k1:'排队',k2:'通过',k3:'回放',k4:'接管', b1:'启动成功任务',b2:'触发回放任务',b3:'触发人工接管',b4:'开启自动流量',b5:'重置面板',b6:'⌂ 返回首页',
+          speed:'速度',prefix:'任务前缀',l1:'队列',l2:'运行中',l3:'门禁',l4:'结果',logTitle:'执行日志',
+          autoOn:'停止自动流量',autoOff:'开启自动流量',
+          emptyQueue:'等待任务进入队列…', emptyRunning:'暂无运行中任务…', emptyGate:'等待门禁校验…', emptyOutcome:'结果将在这里显示…'
+        },
+        en: {
+          tag:'Interactive Orchestration Simulation',title:'BigClaw Orchestration Simulator',subtitle:'Trigger single runs, auto traffic, replay and human takeover. Click a ticket to retry quickly.',
+          k1:'Queued',k2:'Passed',k3:'Replay',k4:'Takeover', b1:'Start Success Run',b2:'Trigger Replay Run',b3:'Trigger Takeover',b4:'Start Auto Traffic',b5:'Reset Board',b6:'⌂ Back Home',
+          speed:'Speed',prefix:'Task Prefix',l1:'Queue',l2:'Running',l3:'Gate',l4:'Outcome',logTitle:'Execution Log',
+          autoOn:'Stop Auto Traffic',autoOff:'Start Auto Traffic',
+          emptyQueue:'Waiting for queued tasks…', emptyRunning:'No running tasks…', emptyGate:'Waiting for gate checks…', emptyOutcome:'Outcomes will appear here…'
+        }
+      };
 
-      const lanes={queue:laneQueue,running:laneRunning,gate:laneGate,outcome:laneOutcome};
-      const logEl=log,metrics={queued:0,passed:0,replay:0,takeover:0};let seq=300,timer=null;
-      const speed=()=>Number(speedSel.value||1),prefixFn=()=> (prefix.value||'TASK').toUpperCase().replace(/\s+/g,'-'),wait=(ms)=>ms*speed();
-      const render=()=>{kQueued.textContent=metrics.queued;kPassed.textContent=metrics.passed;kReplay.textContent=metrics.replay;kTakeover.textContent=metrics.takeover;};
-      const line=(m)=>{const t=new Date().toLocaleTimeString();const d=document.createElement('div');d.textContent=`[${t}] ${m}`;logEl.prepend(d);};
-      const mk=(txt)=>{const el=document.createElement('div');el.className='sim-ticket';el.textContent=txt;el.onclick=()=>runOne('success');return el;};
-      const runOne=(mode='success')=>{const id=`${prefixFn()}-${seq++}`;const q=mk(`${id} · plan`);lanes.queue.prepend(q);metrics.queued++;render();line(`${id} queued`);setTimeout(()=>{lanes.running.prepend(q);q.textContent=`${id} · running`;},wait(700));setTimeout(()=>{lanes.gate.prepend(q);q.textContent=`${id} · gate check`;},wait(1500));setTimeout(()=>{lanes.outcome.prepend(q);if(mode==='success'){q.classList.add('done');q.textContent=`PASS · ${id}`;metrics.passed++;}else if(mode==='replay'){q.classList.add('alert');q.textContent=`REPLAY · ${id}`;metrics.replay++;}else{q.classList.add('alert');q.textContent=`TAKEOVER · ${id}`;metrics.takeover++;}render();},wait(2300));};
-      const autoToggle=()=>{if(timer){clearInterval(timer);timer=null;autoBtn.dataset.running='0';autoBtn.textContent=dict[lang].autoOff;line('auto stopped');return;}timer=setInterval(()=>{const r=Math.random();runOne(r<.7?'success':r<.9?'replay':'takeover');},wait(2600));autoBtn.dataset.running='1';autoBtn.textContent=dict[lang].autoOn;line('auto started');};
-      const reset=()=>{Object.values(lanes).forEach(l=>l.innerHTML='');Object.keys(metrics).forEach(k=>metrics[k]=0);render();line('board reset');};
-      startBtn.onclick=()=>runOne('success');replayBtn.onclick=()=>runOne('replay');takeoverBtn.onclick=()=>runOne('takeover');autoBtn.onclick=autoToggle;resetBtn.onclick=reset;
+      let lang = 'zh';
+      const lanes = { queue: laneQueue, running: laneRunning, gate: laneGate, outcome: laneOutcome };
+      const logEl = log;
+      const metrics = { queued:0, passed:0, replay:0, takeover:0 };
+      let seq = 300, timer = null;
 
-      setInterval(()=>{rayNodes.textContent=String(10+Math.floor(Math.random()*5));k8sPods.textContent=String(42+Math.floor(Math.random()*12));queueDepth.textContent=String(60+Math.floor(Math.random()*35));gatePass.textContent=`${(95.8+Math.random()*1.6).toFixed(1)}%`;},2200);
-      apply('zh');render();line('simulator ready');
+      const speed = () => Number(speedSel.value || 1);
+      const prefixFn = () => (prefix.value || 'TASK').toUpperCase().replace(/\s+/g, '-');
+      const wait = (ms) => ms * speed();
+
+      const apply = (l) => {
+        lang = l;
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const k = el.dataset.i18n;
+          if (dict[l][k]) el.textContent = dict[l][k];
+        });
+        laneQueue.dataset.empty = dict[l].emptyQueue;
+        laneRunning.dataset.empty = dict[l].emptyRunning;
+        laneGate.dataset.empty = dict[l].emptyGate;
+        laneOutcome.dataset.empty = dict[l].emptyOutcome;
+        if (autoBtn.dataset.running === '1') autoBtn.textContent = dict[l].autoOn;
+      };
+      document.querySelectorAll('.lang-btn').forEach(b => b.onclick = () => apply(b.dataset.lang));
+
+      const render = () => {
+        kQueued.textContent = metrics.queued;
+        kPassed.textContent = metrics.passed;
+        kReplay.textContent = metrics.replay;
+        kTakeover.textContent = metrics.takeover;
+      };
+
+      const logRow = (type, msg) => {
+        const t = new Date().toLocaleTimeString();
+        const row = document.createElement('div');
+        row.className = 'row';
+        const chip = document.createElement('span');
+        chip.className = `chip ${type === 'REPLAY' ? 'warn' : type === 'TAKEOVER' ? 'bad' : ''}`.trim();
+        chip.textContent = type;
+        const text = document.createElement('span');
+        text.textContent = `[${t}] ${msg}`;
+        row.append(chip, text);
+        logEl.prepend(row);
+        while (logEl.childElementCount > 36) logEl.removeChild(logEl.lastElementChild);
+      };
+
+      const sparkPath = (seed = 0.5) => {
+        const points = [
+          16 - Math.round(seed * 4),
+          12 - Math.round(seed * 3),
+          13 - Math.round(seed * 5),
+          9 - Math.round(seed * 6),
+          10 - Math.round(seed * 4),
+          7 - Math.round(seed * 6),
+          5 - Math.round(seed * 5)
+        ];
+        return `M1 ${points[0]} L12 ${points[1]} L24 ${points[2]} L35 ${points[3]} L47 ${points[4]} L60 ${points[5]} L71 ${points[6]}`;
+      };
+
+      const syncSparks = () => {
+        const q = Math.min(1, laneQueue.childElementCount / 6);
+        const r = Math.min(1, laneRunning.childElementCount / 6);
+        const g = Math.min(1, laneGate.childElementCount / 6);
+        const o = Math.min(1, laneOutcome.childElementCount / 6);
+        const map = [ ['spark-queue', q], ['spark-running', r], ['spark-gate', g], ['spark-outcome', o] ];
+        map.forEach(([id, v]) => {
+          const svg = document.getElementById(id);
+          if (!svg) return;
+          const line = svg.querySelector('path.line');
+          const fill = svg.querySelector('path.fill');
+          const d = sparkPath(0.35 + v * 0.65);
+          line.setAttribute('d', d);
+          fill.setAttribute('d', `${d} L71 18 L1 18 Z`);
+        });
+      };
+
+      const mk = (txt) => {
+        const el = document.createElement('div');
+        el.className = 'sim-ticket';
+        el.textContent = txt;
+        el.onclick = () => runOne('success');
+        return el;
+      };
+
+      const runOne = (mode = 'success') => {
+        const id = `${prefixFn()}-${seq++}`;
+        const q = mk(`${id} · plan`);
+        lanes.queue.prepend(q);
+        metrics.queued++;
+        render();
+        syncSparks();
+        logRow('QUEUE', `${id} queued`);
+
+        setTimeout(() => {
+          lanes.running.prepend(q);
+          q.textContent = `${id} · running`;
+          syncSparks();
+          logRow('RUN', `${id} running on worker cluster`);
+        }, wait(700));
+
+        setTimeout(() => {
+          lanes.gate.prepend(q);
+          q.textContent = `${id} · gate check`;
+          syncSparks();
+          logRow('GATE', `${id} reached acceptance gate`);
+        }, wait(1500));
+
+        setTimeout(() => {
+          lanes.outcome.prepend(q);
+          if (mode === 'success') {
+            q.classList.add('done');
+            q.textContent = `PASS · ${id}`;
+            metrics.passed++;
+            logRow('PASS', `${id} passed and report exported`);
+          } else if (mode === 'replay') {
+            q.classList.add('alert');
+            q.textContent = `REPLAY · ${id}`;
+            metrics.replay++;
+            logRow('REPLAY', `${id} routed to replay due to policy mismatch`);
+          } else {
+            q.classList.add('alert');
+            q.textContent = `TAKEOVER · ${id}`;
+            metrics.takeover++;
+            logRow('TAKEOVER', `${id} escalated to human takeover`);
+          }
+          render();
+          syncSparks();
+        }, wait(2300));
+      };
+
+      const autoToggle = () => {
+        if (timer) {
+          clearInterval(timer);
+          timer = null;
+          autoBtn.dataset.running = '0';
+          autoBtn.textContent = dict[lang].autoOff;
+          logRow('AUTO', 'auto traffic stopped');
+          return;
+        }
+        timer = setInterval(() => {
+          const r = Math.random();
+          runOne(r < .7 ? 'success' : r < .9 ? 'replay' : 'takeover');
+        }, wait(2600));
+        autoBtn.dataset.running = '1';
+        autoBtn.textContent = dict[lang].autoOn;
+        logRow('AUTO', 'auto traffic started');
+      };
+
+      const reset = () => {
+        Object.values(lanes).forEach(l => l.innerHTML = '');
+        Object.keys(metrics).forEach(k => metrics[k] = 0);
+        render();
+        syncSparks();
+        logRow('SYS', 'board reset');
+      };
+
+      startBtn.onclick = () => runOne('success');
+      replayBtn.onclick = () => runOne('replay');
+      takeoverBtn.onclick = () => runOne('takeover');
+      autoBtn.onclick = autoToggle;
+      resetBtn.onclick = reset;
+
+      setInterval(() => {
+        rayNodes.textContent = String(10 + Math.floor(Math.random() * 5));
+        k8sPods.textContent = String(42 + Math.floor(Math.random() * 12));
+        queueDepth.textContent = String(60 + Math.floor(Math.random() * 35));
+        gatePass.textContent = `${(95.8 + Math.random() * 1.6).toFixed(1)}%`;
+      }, 2200);
+
+      apply('zh');
+      render();
+      syncSparks();
+      logRow('SYS', 'simulator ready');
     </script>
   </body>
 </html>
