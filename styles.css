@@ -70,6 +70,11 @@ nav a:hover { color: var(--text); }
   margin-top: 18px;
   font-size: 18px;
 }
+.subtitle.en {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #8fa1bd;
+}
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
@@ -188,6 +193,43 @@ nav a:hover { color: var(--text); }
 .governance h3 { margin: 0 0 8px; font-size: 17px; }
 .governance p { margin: 0; color: var(--muted); font-size: 14px; }
 
+.board-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.lane {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--panel);
+  padding: 14px;
+}
+.lane h4 {
+  margin: 0 0 10px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+}
+.ticket {
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 13px;
+  margin-bottom: 8px;
+  border: 1px solid transparent;
+  animation: pulse 2.4s ease-in-out infinite;
+}
+.ticket.waiting { background: rgba(255,190,85,.08); border-color: rgba(255,190,85,.35); }
+.ticket.running { background: rgba(98,166,255,.1); border-color: rgba(98,166,255,.4); }
+.ticket.gate { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.2); }
+.ticket.done { background: rgba(51,209,143,.1); border-color: rgba(51,209,143,.45); }
+.ticket.alert { background: rgba(255,107,107,.1); border-color: rgba(255,107,107,.45); }
+
+@keyframes pulse {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
 .footer {
   margin-top: 24px;
   border-top: 1px solid var(--line);
@@ -213,11 +255,12 @@ nav a:hover { color: var(--text); }
   .execution .timeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .governance { grid-template-columns: 1fr; }
   .hero-metrics { grid-template-columns: 1fr; }
+  .board-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 740px) {
   nav { display: none; }
-  .grid, .grid.six, .execution .timeline { grid-template-columns: 1fr; }
+  .grid, .grid.six, .execution .timeline, .board-grid { grid-template-columns: 1fr; }
   .footer-inner { flex-direction: column; align-items: flex-start; padding: 14px 0; }
   .links a { margin: 0 12px 0 0; }
 }
