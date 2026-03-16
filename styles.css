@@ -374,16 +374,14 @@ nav a.nav-active::after { transform: scaleX(1); }
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
 }
-.brand-card { background: linear-gradient(180deg, rgba(16,28,50,.65), rgba(10,17,32,.5)); }
-.swatches { display:flex; gap:8px; margin-top:12px; }
-.sw { width:26px; height:26px; border-radius:8px; border:1px solid rgba(255,255,255,.15); }
-.sw.c1 { background:#070b12; }
-.sw.c2 { background:#102238; }
-.sw.c3 { background:#3e8bff; }
-.sw.c4 { background:#33d18f; }
-.icon-rail { margin-top:10px; display:flex; gap:10px; color:#b7d5ff; font-size:18px; }
+.brand-card {
+  background: linear-gradient(180deg, rgba(16,28,50,.65), rgba(10,17,32,.5));
+  min-height: 196px;
+  display: flex;
+  flex-direction: column;
+}
 .tone-pill {
-  margin-top: 12px;
+  margin-top: auto;
   display: inline-block;
   font-size: 12px;
   font-weight: 700;
