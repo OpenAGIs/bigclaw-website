@@ -23,7 +23,7 @@
 
     <header class="topbar">
       <div class="container topbar-inner">
-        <div class="brand">BigClaw</div>
+        <div class="brand"><span class="brand-mark" aria-hidden="true"></span><span>BigClaw</span></div>
         <nav>
           <a href="#capabilities" data-i18n="navCapabilities">Capabilities</a>
           <a href="#architecture" data-i18n="navArchitecture">Architecture</a>
@@ -51,6 +51,7 @@
         <p class="subtitle en" data-i18n="heroSubEn">
           BigClaw is a distributed orchestration control plane for reliable, auditable, parallel AI execution.
         </p>
+        <p class="brand-slogan" data-i18n="brandSlogan">Brand Signal: Deterministic Execution · Elastic Scale · Auditable Intelligence</p>
 
         <div class="hero-actions">
           <a class="btn primary" href="https://github.com/OpenAGIs/BigClaw" target="_blank" rel="noreferrer" data-i18n="btnSource">查看 BigClaw 源码</a>
@@ -77,6 +78,29 @@
           <div class="kpi"><span data-i18n="kpi2">Replay Rate</span><strong id="kpi-replay">4.8%</strong></div>
           <div class="kpi"><span data-i18n="kpi3">Avg Latency</span><strong id="kpi-latency">1.42s</strong></div>
           <div class="kpi"><span data-i18n="kpi4">Active Workers</span><strong id="kpi-workers">32</strong></div>
+        </div>
+      </section>
+
+      <section id="brand" class="container section brand-section">
+        <h2 data-i18n="brandTitle">Brand System</h2>
+        <div class="brand-grid">
+          <article class="card brand-card">
+            <h3 data-i18n="brandVh">Visual Language</h3>
+            <p data-i18n="brandVp">深海底色 + 电光蓝发光边，强调 Mission-Control 级可靠执行。</p>
+            <div class="swatches">
+              <span class="sw c1"></span><span class="sw c2"></span><span class="sw c3"></span><span class="sw c4"></span>
+            </div>
+          </article>
+          <article class="card brand-card">
+            <h3 data-i18n="brandIh">Icon Grammar</h3>
+            <p data-i18n="brandIp">统一使用“节点、连线、脉冲、门禁”符号，构建可编排的品牌识别。</p>
+            <div class="icon-rail" aria-hidden="true"><span>◎</span><span>⟶</span><span>◍</span><span>⟐</span><span>✓</span></div>
+          </article>
+          <article class="card brand-card">
+            <h3 data-i18n="brandTh">Tone & Messaging</h3>
+            <p data-i18n="brandTp">避免空泛 AI 口号，以“可控、可审计、可回放”作为核心叙事骨架。</p>
+            <div class="tone-pill" data-i18n="brandPill">Control Plane for Agent-Native Operations</div>
+          </article>
         </div>
       </section>
 
@@ -287,7 +311,12 @@
           heroTitle: '让 AI 执行从“会跑一次”变成“长期可控并行运行”',
           heroSubtitle: 'BigClaw 提供分布式任务编排、策略治理与可审计执行账本。将 Scheduler、Queue、Runtime、Triage、Replay 连接成统一控制平面，支撑企业级 Agent 工作流持续稳定交付。',
           heroSubEn: 'BigClaw 是面向企业级并行执行的可编排控制平面。',
+          brandSlogan: '品牌信号：确定性执行 · 弹性扩展 · 可审计智能',
           btnSource: '查看 BigClaw 源码', btnRef: '了解 ClawEvolver',
+          brandTitle: '品牌体系',
+          brandVh: '视觉语言', brandVp: '深海底色 + 电光蓝发光边，强调 Mission-Control 级可靠执行。',
+          brandIh: '图标语法', brandIp: '统一使用“节点、连线、脉冲、门禁”符号，构建可编排的品牌识别。',
+          brandTh: '语气与叙事', brandTp: '避免空泛 AI 口号，以“可控、可审计、可回放”作为核心叙事骨架。', brandPill: '面向 Agent-Native 运营的控制平面',
           metricWorkers: '并行执行器', metricWorkersDesc: '多执行器并行调度',
           metricPolicy: '策略门禁', metricPolicyDesc: '风险阈值 + 验收门禁',
           metricLedger: '审计账本', metricLedgerDesc: '全链路日志与工件追溯',
@@ -327,7 +356,12 @@
           heroTitle: 'From one-off demos to continuously governed parallel AI execution',
           heroSubtitle: 'BigClaw provides distributed orchestration, policy governance, and auditable execution ledgers. It unifies Scheduler, Queue, Runtime, Triage, and Replay into one enterprise control plane.',
           heroSubEn: 'Built for stable long-running agent workflows at production scale.',
+          brandSlogan: 'Brand Signal: Deterministic Execution · Elastic Scale · Auditable Intelligence',
           btnSource: 'View BigClaw Source', btnRef: 'Explore ClawEvolver',
+          brandTitle: 'Brand System',
+          brandVh: 'Visual Language', brandVp: 'Deep-sea base tones and electric-blue glows project mission-control reliability.',
+          brandIh: 'Icon Grammar', brandIp: 'Use nodes, links, pulses, and gates as a consistent orchestration symbol set.',
+          brandTh: 'Tone & Messaging', brandTp: 'Avoid generic AI slogans; lead with controllability, auditability, and replayability.', brandPill: 'Control Plane for Agent-Native Operations',
           metricWorkers: 'Parallel Workers', metricWorkersDesc: 'Multi-worker parallel scheduling',
           metricPolicy: 'Policy Gates', metricPolicyDesc: 'Risk thresholds + acceptance gates',
           metricLedger: 'Audit Ledger', metricLedgerDesc: 'End-to-end logs and artifact traceability',
