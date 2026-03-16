@@ -198,35 +198,46 @@ nav a.nav-active::after { transform: scaleX(1); }
   overflow: hidden;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 0 24px rgba(62,139,255,.15);
 }
-.claw-arm {
+.claw-brand-glow {
   position: absolute;
-  left: 54px;
-  top: 54px;
-  width: 88px;
-  height: 12px;
+  left: 18px;
+  top: 20px;
+  width: 150px;
+  height: 78px;
   border-radius: 999px;
-  background: linear-gradient(90deg, rgba(160,206,255,.9), rgba(98,166,255,.35));
-  transform-origin: right center;
-  animation: clawSwing 2.4s ease-in-out infinite;
+  background: radial-gradient(circle at 65% 50%, rgba(98,166,255,.3), rgba(98,166,255,0));
 }
-.claw-core {
+.claw-shell {
   position: absolute;
-  left: 138px;
-  top: 43px;
-  width: 32px;
-  height: 32px;
+  left: 58px;
+  width: 106px;
+  height: 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(140,196,255,.55);
+  background: linear-gradient(90deg, rgba(26,56,96,.95), rgba(72,142,255,.45));
+  box-shadow: 0 0 18px rgba(98,166,255,.25);
+  transform-origin: 12% 50%;
+}
+.claw-shell.upper { top: 38px; animation: clawUpper 2.6s ease-in-out infinite; }
+.claw-shell.lower { top: 64px; animation: clawLower 2.6s ease-in-out infinite; }
+.claw-joint {
+  position: absolute;
+  left: 84px;
+  top: 52px;
+  width: 36px;
+  height: 36px;
   border-radius: 10px;
   background: linear-gradient(135deg, #89c0ff, #3e8bff);
-  box-shadow: 0 0 18px rgba(98,166,255,.6);
+  box-shadow: 0 0 20px rgba(98,166,255,.65);
   transform: rotate(45deg);
-  animation: corePulse 2.4s ease-in-out infinite;
+  animation: corePulse 2.6s ease-in-out infinite;
 }
 .claw-finger {
   position: absolute;
-  left: 158px;
+  left: 156px;
   top: 58px;
-  width: 78px;
-  height: 8px;
+  width: 82px;
+  height: 7px;
   border-radius: 999px;
   background: linear-gradient(90deg, rgba(152,204,255,.95), rgba(98,166,255,.2));
   transform-origin: 0% 50%;
@@ -294,9 +305,13 @@ nav a.nav-active::after { transform: scaleX(1); }
 .claw-pulse.p2 { top: 44px; animation-delay: .35s; }
 .claw-pulse.p3 { top: 68px; animation-delay: .7s; }
 
-@keyframes clawSwing {
-  0%,100% { transform: rotate(-6deg) translateX(0); }
-  50% { transform: rotate(6deg) translateX(6px); }
+@keyframes clawUpper {
+  0%,100% { transform: rotate(-25deg) translateX(0); }
+  50% { transform: rotate(-11deg) translateX(4px); }
+}
+@keyframes clawLower {
+  0%,100% { transform: rotate(25deg) translateX(0); }
+  50% { transform: rotate(11deg) translateX(4px); }
 }
 @keyframes corePulse {
   0%,100% { box-shadow: 0 0 14px rgba(98,166,255,.45); }
@@ -600,12 +615,15 @@ nav a.nav-active::after { transform: scaleX(1); }
   nav { display: none; }
   .grid, .grid.six, .execution .timeline, .board-grid, .kpi-strip, .brand-grid { grid-template-columns: 1fr; }
   .claw-scene { height: 96px; }
-  .claw-arm { left: 18px; width: 72px; top: 44px; }
-  .claw-core { left: 84px; top: 34px; width: 26px; height: 26px; }
-  .claw-finger { left: 98px; width: 56px; top: 47px; }
-  .parallel-lanes { left: 170px; gap: 11px; }
+  .claw-brand-glow { left: 8px; top: 18px; width: 120px; height: 64px; }
+  .claw-shell { left: 26px; width: 82px; height: 20px; }
+  .claw-shell.upper { top: 34px; }
+  .claw-shell.lower { top: 56px; }
+  .claw-joint { left: 44px; top: 44px; width: 26px; height: 26px; }
+  .claw-finger { left: 104px; width: 50px; top: 48px; }
+  .parallel-lanes { left: 166px; gap: 11px; }
   .parallel-lanes span { width: calc(100% - 14px); }
-  .claw-pulse { left: 156px; }
+  .claw-pulse { left: 150px; }
   .footer-inner { flex-direction: column; align-items: flex-start; padding: 14px 0; }
   .links a { margin: 0 12px 0 0; }
 }
