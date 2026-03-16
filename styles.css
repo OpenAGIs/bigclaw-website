@@ -77,11 +77,10 @@ body {
   gap: 12px;
 }
 .brand { font-size: 20px; font-weight: 800; letter-spacing: 0.5px; display:flex; align-items:center; gap:8px; }
-.brand-mark {
-  width: 14px; height: 14px; border-radius: 4px;
-  background: linear-gradient(135deg, #89c0ff, #3e8bff);
-  box-shadow: 0 0 12px rgba(98,166,255,.65);
-  transform: rotate(45deg);
+.brand-logo {
+  width: 18px;
+  height: 18px;
+  filter: drop-shadow(0 0 8px rgba(98,166,255,.6));
 }
 nav a {
   text-decoration: none;
