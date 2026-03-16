@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -20,7 +20,7 @@
     <main class="container section" style="padding-top:72px">
       <div class="docs-head">
         <h1 data-i18n="title">BigClaw 文档中心</h1>
-        <div class="lang-switch"><button class="lang-btn active" data-lang="zh">中</button><button class="lang-btn" data-lang="en">EN</button></div>
+        <div class="lang-switch"><button class="lang-btn" data-lang="zh">中</button><button class="lang-btn active" data-lang="en">EN</button></div>
       </div>
       <p class="subtitle" data-i18n="subtitle">覆盖架构说明、工作流 DSL、治理策略与运维手册。</p>
 
@@ -37,7 +37,7 @@
       const d={zh:{title:'BigClaw 文档中心',subtitle:'覆盖架构说明、工作流 DSL、治理策略与运维手册。',c1h:'架构与控制平面',c1p:'控制中心、调度器、运行时、账本与报告之间的系统关系。',c2h:'工作流 DSL',c2p:'任务图定义、验收门禁、策略注入与回放规则。',c3h:'策略与治理',c3p:'风险评分、审批路径、审计追踪与版本回滚。',c4h:'AgentNative 基础设施',c4p:'Ray 执行池、Kubernetes 运行时、事件流主干与多集群运维。',home:'返回首页'},en:{title:'BigClaw Documentation',subtitle:'Architecture, workflow DSL, governance policies, and operations guides.',c1h:'Architecture & Control Plane',c1p:'System relations across control center, scheduler, runtime, ledger, and reports.',c2h:'Workflow DSL',c2p:'Task graph definitions, acceptance gates, policy injection, and replay rules.',c3h:'Policy & Governance',c3p:'Risk scoring, approval paths, audit trail, and version rollback.',c4h:'AgentNative Infrastructure',c4p:'Ray executor pools, Kubernetes runtime, event streaming spine, and multi-cluster ops.',home:'Back Home'}};
       const apply=(l)=>{document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(d[l][k])el.textContent=d[l][k];});};
       document.querySelectorAll('.lang-btn').forEach(b=>b.onclick=()=>apply(b.dataset.lang));
-      apply('zh');
+      apply('en');
     </script>
   </body>
 </html>

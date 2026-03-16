@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -47,7 +47,7 @@
           <p class="tag" data-i18n="tag">Interactive Orchestration Simulation</p>
           <h1 data-i18n="title">BigClaw 任务编排模拟器</h1>
         </div>
-        <div class="lang-switch"><button class="lang-btn active" data-lang="zh">中</button><button class="lang-btn" data-lang="en">EN</button></div>
+        <div class="lang-switch"><button class="lang-btn" data-lang="zh">中</button><button class="lang-btn active" data-lang="en">EN</button></div>
       </div>
       <p class="subtitle" data-i18n="subtitle">支持单任务触发、自动流转、失败回放和人工接管。点击 Ticket 可快速重试。</p>
 
@@ -146,7 +146,7 @@
         }
       };
 
-      let lang = 'zh';
+      let lang = 'en';
       const lanes = { queue: laneQueue, running: laneRunning, gate: laneGate, outcome: laneOutcome };
       const logEl = log;
       const metrics = { queued:0, passed:0, replay:0, takeover:0 };
@@ -315,7 +315,7 @@
         gatePass.textContent = `${(95.8 + Math.random() * 1.6).toFixed(1)}%`;
       }, 2200);
 
-      apply('zh');
+      apply('en');
       render();
       syncSparks();
       logRow('SYS', 'simulator ready');
