@@ -382,7 +382,19 @@ nav a.nav-active::after { transform: scaleX(1); }
 .sw.c3 { background:#3e8bff; }
 .sw.c4 { background:#33d18f; }
 .icon-rail { margin-top:10px; display:flex; gap:10px; color:#b7d5ff; font-size:18px; }
-.tone-pill { margin-top:12px; display:inline-block; font-size:12px; color:#c6dcff; border:1px solid rgba(98,166,255,.38); border-radius:999px; padding:6px 12px; }
+.tone-pill {
+  margin-top: 12px;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .35px;
+  color: #e5f1ff;
+  border: 1px solid rgba(133,197,255,.72);
+  border-radius: 999px;
+  padding: 7px 13px;
+  background: linear-gradient(90deg, rgba(45,96,170,.45), rgba(76,151,255,.35));
+  box-shadow: 0 0 0 1px rgba(98,166,255,.2) inset, 0 0 16px rgba(98,166,255,.28);
+}
 
 .architecture .stack {
   display: grid;
