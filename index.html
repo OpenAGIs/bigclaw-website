@@ -27,7 +27,6 @@
       <div class="container topbar-inner">
         <div class="brand"><img class="brand-logo" src="/assets/logo.jpg" alt="BigClaw logo" /><span>BigClaw</span></div>
         <nav>
-          <a href="#highlights" data-i18n="navHighlights">Highlights</a>
           <a href="#capabilities" data-i18n="navCapabilities">Capabilities</a>
           <a href="#architecture" data-i18n="navArchitecture">Architecture</a>
           <a href="#feature" data-i18n="navFeature">Feature</a>
@@ -47,16 +46,19 @@
         <div class="signal-row" aria-hidden="true">
           <span data-i18n="sig1">ORCH/QUEUE</span><span data-i18n="sig2">RUNTIME/SANDBOX</span><span data-i18n="sig3">LEDGER/AUDIT</span><span data-i18n="sig4">POLICY/GATE</span>
         </div>
-        <h1 data-i18n="heroTitle">让 AI 执行从“会跑一次”变成“长期可控并行运行”</h1>
-        <p class="subtitle" data-i18n="heroSubtitle">
-          BigClaw 提供分布式任务编排、策略治理与可审计执行账本。将 Scheduler、Queue、Runtime、Triage、Replay 连接成统一控制平面，支撑企业级 Agent 工作流持续稳定交付。
-        </p>
-        <p class="subtitle en" data-i18n="heroSubEn">
-          BigClaw is a distributed orchestration control plane for reliable, auditable, parallel AI execution.
-        </p>
-        <p class="brand-slogan" data-i18n="brandSlogan">From PR Signal to Audited Delivery.</p>
+        <div class="hero-flat">
+          <div class="hero-copy">
+            <h1 data-i18n="heroTitle">让 AI 执行从“会跑一次”变成“长期可控并行运行”</h1>
+            <p class="subtitle" data-i18n="heroSubtitle">
+              BigClaw 提供分布式任务编排、策略治理与可审计执行账本。将 Scheduler、Queue、Runtime、Triage、Replay 连接成统一控制平面，支撑企业级 Agent 工作流持续稳定交付。
+            </p>
+            <p class="subtitle en" data-i18n="heroSubEn">
+              BigClaw is a distributed orchestration control plane for reliable, auditable, parallel AI execution.
+            </p>
+            <p class="brand-slogan" data-i18n="brandSlogan">From PR Signal to Audited Delivery.</p>
+          </div>
 
-        <div class="claw-scene" aria-hidden="true">
+          <div class="claw-scene" aria-hidden="true">
           <svg class="claw-svg" viewBox="0 0 760 120" preserveAspectRatio="none">
             <defs>
               <linearGradient id="clawStroke" x1="0" y1="0" x2="1" y2="0">
@@ -95,6 +97,7 @@
               <circle class="runner r4" cx="196" cy="86" r="3.4"/>
             </g>
           </svg>
+          </div>
         </div>
 
         <div class="hero-actions">
