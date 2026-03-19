@@ -27,6 +27,7 @@
       <div class="container topbar-inner">
         <div class="brand"><img class="brand-logo" src="/assets/logo.jpg" alt="BigClaw logo" /><span>BigClaw</span></div>
         <nav>
+          <a href="#highlights" data-i18n="navHighlights">Highlights</a>
           <a href="#capabilities" data-i18n="navCapabilities">Capabilities</a>
           <a href="#architecture" data-i18n="navArchitecture">Architecture</a>
           <a href="#feature" data-i18n="navFeature">Feature</a>
@@ -121,6 +122,28 @@
           <div class="kpi"><span data-i18n="kpi2">Replay Rate</span><strong id="kpi-replay">4.8%</strong></div>
           <div class="kpi"><span data-i18n="kpi3">Avg Latency</span><strong id="kpi-latency">1.42s</strong></div>
           <div class="kpi"><span data-i18n="kpi4">Active Workers</span><strong id="kpi-workers">32</strong></div>
+        </div>
+      </section>
+
+      <section id="highlights" class="container section highlights-section">
+        <h2 data-i18n="hlTitle">Project Highlights</h2>
+        <div class="highlights-grid">
+          <article class="card highlight-card">
+            <h3 data-i18n="hl1h">Policy/Prompt Version Center (BIG-1606)</h3>
+            <p data-i18n="hl1p">Version history, diffs, rollback targets, and bundle rendering for controlled release operations.</p>
+          </article>
+          <article class="card highlight-card">
+            <h3 data-i18n="hl2h">Risk-Aware Scheduler + Persistent Queue</h3>
+            <p data-i18n="hl2p">Unified task model with risk/tool-based scheduling and durable priority queue execution records.</p>
+          </article>
+          <article class="card highlight-card">
+            <h3 data-i18n="hl3h">Sandbox Runtime + Auditable Gateway</h3>
+            <p data-i18n="hl3p">Isolated worker runtime profiles with full tool-call audit trails and controllable permissions.</p>
+          </article>
+          <article class="card highlight-card">
+            <h3 data-i18n="hl4h">Triage + Replay + Benchmark Loop</h3>
+            <p data-i18n="hl4p">Auto triage for failures/approvals, replay runner, weighted scoring, and version-to-version quality comparison.</p>
+          </article>
         </div>
       </section>
 
@@ -345,7 +368,7 @@
 
       const i18n = {
         zh: {
-          navCapabilities: '能力', navArchitecture: '架构', navFeature: '特性', navExecution: '执行', navGovernance: '治理',
+          navHighlights: '亮点', navCapabilities: '能力', navArchitecture: '架构', navFeature: '特性', navExecution: '执行', navGovernance: '治理',
           tag: 'Mission Control for AI Execution',
           sig1: '编排/队列', sig2: '运行时/沙箱', sig3: '账本/审计', sig4: '策略/门禁',
           kpi1: '成功率', kpi2: '回放率', kpi3: '平均延迟', kpi4: '活跃执行器',
@@ -354,6 +377,11 @@
           heroSubEn: 'BigClaw 是面向企业级并行执行的可编排控制平面。',
           brandSlogan: '从 PR 信号到可审计交付。',
           btnSource: '查看 BigClaw 源码', btnRef: '了解 ClawEvolver',
+          hlTitle: '项目亮点',
+          hl1h: '策略/Prompt 版本中心（BIG-1606）', hl1p: '提供版本历史、差异对比、回滚目标与 bundle 渲染，确保发布可控。',
+          hl2h: '风险调度 + 持久化队列', hl2p: '统一任务模型结合风险/工具约束调度，并记录完整优先级队列执行轨迹。',
+          hl3h: '沙箱运行时 + 可审计网关', hl3p: '隔离 Worker 执行与工具调用权限，保留全量审计轨迹。',
+          hl4h: '分诊 + 回放 + 评测闭环', hl4p: '自动处理失败/待审批任务，支持回放、加权评分与版本效果对比。',
           brandTitle: '为什么是 BigClaw',
           brandVh: '一条链路，端到端闭环', brandVp: '从 PR/任务信号进入，到调度、执行、验收、报告导出，形成闭环交付链路。', brandVtag: 'Signal → Plan → Run → Gate → Report',
           brandIh: '默认并行，高吞吐执行', brandIp: '队列 + 风险调度 + 并行 Worker，保证高吞吐执行，同时避免无序重试。', brandItag: 'Queue + Scheduler + Workers',
@@ -390,7 +418,7 @@
           footer: '© 2026 BigClaw · 分布式编排控制平面'
         },
         en: {
-          navCapabilities: 'Capabilities', navArchitecture: 'Architecture', navFeature: 'Feature', navExecution: 'Execution', navGovernance: 'Governance',
+          navHighlights: 'Highlights', navCapabilities: 'Capabilities', navArchitecture: 'Architecture', navFeature: 'Feature', navExecution: 'Execution', navGovernance: 'Governance',
           tag: 'Mission Control for AI Execution',
           sig1: 'ORCH/QUEUE', sig2: 'RUNTIME/SANDBOX', sig3: 'LEDGER/AUDIT', sig4: 'POLICY/GATE',
           kpi1: 'Success Rate', kpi2: 'Replay Rate', kpi3: 'Avg Latency', kpi4: 'Active Workers',
@@ -399,6 +427,11 @@
           heroSubEn: 'Built for stable long-running agent workflows at production scale.',
           brandSlogan: 'From PR Signal to Audited Delivery.',
           btnSource: 'View BigClaw Source', btnRef: 'Explore ClawEvolver',
+          hlTitle: 'Project Highlights',
+          hl1h: 'Policy/Prompt Version Center (BIG-1606)', hl1p: 'Version history, diffs, rollback targets, and bundle rendering for controlled releases.',
+          hl2h: 'Risk-Aware Scheduler + Persistent Queue', hl2p: 'A unified task model with risk/tool-constrained scheduling and durable queue execution records.',
+          hl3h: 'Sandbox Runtime + Auditable Gateway', hl3p: 'Isolated worker runtime profiles with controllable permissions and full tool-call audit trails.',
+          hl4h: 'Triage + Replay + Benchmark Loop', hl4p: 'Auto triage for failed/approval-pending runs with replay, weighted scoring, and version comparison.',
           brandTitle: 'Why BigClaw',
           brandVh: 'One Pipeline, End-to-End', brandVp: 'From PR/task signals to scheduling, execution, acceptance, and report export in one delivery loop.', brandVtag: 'Signal → Plan → Run → Gate → Report',
           brandIh: 'Parallel by Default', brandIp: 'Queue + risk-aware scheduling + parallel workers for high throughput without chaotic retries.', brandItag: 'Queue + Scheduler + Workers',
@@ -460,6 +493,7 @@
 
         const byId = new Map(navLinks.map((a) => [a.getAttribute('href').slice(1), a]));
         const sectionBoost = {
+          highlights: 0.88,
           capabilities: 0.95,
           feature: 1.05,
           architecture: 1.2,
